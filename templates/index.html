@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroPulse</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="{{ url_for('static', filename='logo.jpg') }}">
+</head>
+<body style="text-align: center; font-family: Arial, sans-serif; background: linear-gradient(135deg, #16425b, #16425b); color: #fff; margin: 0; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    
+    <div style="background: #3a7ca5; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
+        <!-- Corrected Logo Path -->
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" style="width: 90px; height: 90px; margin-right: 10px; border-radius: 5px;">
+        <div>
+            <h1 style="font-size: 36px; color: #212529; margin: 0; font-family: 'Verdana', sans-serif;">Your Brain’s Best Ally!</h1>
+            <p style="font-size: 18px; color: #343a40; font-weight: bold; font-family: 'Georgia', serif;">AI-powered tumor detection—fast, smart, and here for you.</p>
+        </div>
+    </div>
+
+    <h1 style="font-size: 26px; color: #d9dcd6; margin-bottom: 20px; font-family: 'Verdana', sans-serif;">Upload an MRI Scan</h1>
+    <form method="post" enctype="multipart/form-data" style="background: #3a7ca5; padding: 20px; border-radius: 10px; display: inline-block;">
+        <input type="file" name="file1" style="padding: 10px; margin: 10px; background-color: #106db4; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+        <input type="submit" value="Upload" style="background-color: #106db4; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 5px; cursor: pointer; transition: 0.3s;">
+    </form>
+
+    {% if image_path %}
+        <div style="background: #3a7ca5; padding: 15px; border-radius: 10px; margin-top: 20px; display: flex; flex-direction: column; align-items: center;">
+            <h2 style="font-size: 24px; color: #ffffff;">Result: {{ result }}</h2>
+            <img src="{{ image_path }}" alt="MRI scan of Brain" width="300" style="margin-top: 15px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);">
+            {% if result == "Brain Cancer" %}
+                <p style="font-size: 20px; font-weight: bolder; color: #001845; font-family: 'Georgia', serif;">"You’re tough—this is just a bump. Keep shining!"</p>
+            {% else %}
+                <p style="font-size: 20px; font-weight: bolder; color: #001845; font-family: 'Georgia', serif;">"Clear scan—rock on, superstar!"</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
